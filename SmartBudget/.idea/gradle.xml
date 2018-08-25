@@ -11,7 +11,11 @@
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
+<<<<<<< HEAD
         <option name="useAutoImport" value="true" />
+=======
+        <option name="resolveModulePerSourceSet" value="false" />
+>>>>>>> 82bc81919f89a34b3cfb64e9ec2c177aecfa2846
       </GradleProjectSettings>
     </option>
   </component>
