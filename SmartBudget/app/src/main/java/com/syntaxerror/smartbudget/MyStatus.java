@@ -1,22 +1,21 @@
 package com.syntaxerror.smartbudget;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-
-public class NewBudget extends AppCompatActivity {
+public class MyStatus extends AppCompatActivity {
     private ImageView backImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_budget);
+        setContentView(R.layout.mystatus);
+
         backImageButton = (ImageView) findViewById(R.id.backImageView);
         BackClick();
-
     }
 
     public void BackClick()

@@ -1,5 +1,6 @@
 package com.syntaxerror.smartbudget;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,42 +11,47 @@ import com.syntaxerror.smartbudget.model.budgetInfo;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button newBudget ;
+    Button newBudget,viewBudget,myStatus;
     TextView budgetName;
     budgetInfo sample ;
-    Button viewBudget;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        myStatus = (Button) findViewById(R.id.mystatusbutton);
         newBudget = (Button) findViewById(R.id.newbudgetbutton);
         viewBudget = (Button) findViewById(R.id.viewbudgetbutton);
         budgetName = (TextView) findViewById(R.id.nameOfBudgetText);
 
 
 
-
+        myStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,MyStatus.class));
+            }
+        });
 
         viewBudget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sample = getRandom();
-                budgetName.setText(sample.get);
+
             }
         });
 
-        newBudget.setOnClickListener(new View.OnClickListener() {
+        newBudget.setOnClickListener(
+                new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                budgetInfo num2 = new   budgetInfo(002,"second budget");
-                num2.save();
-
-
+                startActivity(new Intent(MainActivity.this,NewBudget.class));
 
             }
         });
+
+
 
 
 

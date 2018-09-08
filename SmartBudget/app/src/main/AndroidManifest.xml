@@ -24,6 +24,12 @@
         </activity>
         <activity android:name=".NewBudget">
         </activity>
+        <activity android:name=".login">
+        </activity>
+        <activity android:name=".Signup">
+        </activity>
+        <activity android:name=".MyStatus">
+        </activity>
     </application>
 
 </manifest>
