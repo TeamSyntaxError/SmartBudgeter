@@ -6,14 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.activeandroid.query.Select;
-import com.syntaxerror.smartbudget.model.budgetInfo;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
     Button newBudget,viewBudget,myStatus;
     TextView budgetName;
-    budgetInfo sample ;
+
 
 
     @Override
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         viewBudget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,ViewBudget.class));
 
             }
         });
@@ -56,10 +57,5 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public static budgetInfo getRandom() {
-        return new Select()
-                .from(budgetInfo.class)
-                .where("budget_id = 001" )
-                .executeSingle();
-    }
+
 }
