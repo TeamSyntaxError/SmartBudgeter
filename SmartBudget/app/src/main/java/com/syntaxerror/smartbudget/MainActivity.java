@@ -1,10 +1,13 @@
 package com.syntaxerror.smartbudget;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -13,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button newBudget,viewBudget,myStatus;
     TextView budgetName;
+    ImageView logoutImage;
 
 
 
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         newBudget = (Button) findViewById(R.id.newbudgetbutton);
         viewBudget = (Button) findViewById(R.id.viewbudgetbutton);
         budgetName = (TextView) findViewById(R.id.nameOfBudgetText);
+        logoutImage = (ImageView) findViewById(R.id.imageView3);
 
 
 
@@ -52,6 +57,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        logoutImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences SPdata = getSharedPreferences("sharedData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = SPdata.edit();
+                editor.putBoolean("hasLoggedIn",false);
+                editor.commit();
+                startActivity(new Intent(MainActivity.this,Home.class));
+                finish();
+
+            }
+        });
 
 
 
