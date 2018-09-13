@@ -13,10 +13,7 @@
 
 
         <activity android:name=".Home">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity android:name=".MainActivity">
         </activity>
@@ -29,6 +26,12 @@
         <activity android:name=".MyStatus">
         </activity>
         <activity android:name=".ViewBudget">
+        </activity>
+        <activity android:name=".edit_budget">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
     </application>
 
