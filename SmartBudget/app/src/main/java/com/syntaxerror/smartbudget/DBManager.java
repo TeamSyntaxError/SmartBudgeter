@@ -21,6 +21,8 @@ public class DBManager extends SQLiteOpenHelper {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
+
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // CREATE user TABLE
@@ -41,7 +43,7 @@ public class DBManager extends SQLiteOpenHelper {
                 + BudgetTable.BUDGET_AMOUNT + "REAL);");
 
         //CREATE Item TABLE
-        sqLiteDatabase.execSQL("CREATE TABLE" + Item.TABLE_NAME
+        sqLiteDatabase.execSQL("CREATE TABLE " + Item.TABLE_NAME
                 +"(" +Item.ITEM_ID + "INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + Item.ITEM_NAME + "TEXT"
                 + Item.ITEM_DESC + "TEXT"
@@ -63,7 +65,10 @@ public class DBManager extends SQLiteOpenHelper {
         Log.w("LOG_TAG", "Upgrading database from version "
                 + i + " to " + i1 + ", which will destroy all old data");
 // KILL PREVIOUS TABLES IF UPGRADED
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + User.TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + BudgetTable.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Item.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + UserBudgetTable.TABLE_NAME);
 // CREATE NEW INSTANCE OF SCHEMA
         onCreate(sqLiteDatabase);
     }

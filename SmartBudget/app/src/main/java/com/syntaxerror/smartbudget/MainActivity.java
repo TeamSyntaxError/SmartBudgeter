@@ -5,13 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
 
 public class MainActivity extends AppCompatActivity {
-
-    Button newBudget,viewBudget,myStatus;
+    DBManager mydb = new DBManager(this);
+    EditText editName , editAmount ;
+    Button newBudget,viewBudget,myStatus,submit;
     TextView budgetName;
 
 
@@ -20,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        editName = (EditText)findViewById(R.id.nameEditText);
+        editAmount = (EditText)findViewById(R.id.nameEditText);
+        submit = (Button) findViewById(R.id.button);
 
         myStatus = (Button) findViewById(R.id.mystatusbutton);
         newBudget = (Button) findViewById(R.id.newbudgetbutton);

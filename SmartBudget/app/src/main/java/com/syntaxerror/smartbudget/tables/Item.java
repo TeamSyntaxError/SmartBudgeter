@@ -10,5 +10,5 @@ public class Item {
     public static final String BUDGET_ID = "budget_id";
 
 
-    public static final String TABLE_NAME = ;
+    public static final String TABLE_NAME = "item";
 }
