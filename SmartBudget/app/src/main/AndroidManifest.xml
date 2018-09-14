@@ -28,6 +28,9 @@
         <activity android:name=".ViewBudget">
         </activity>
         <activity android:name=".edit_budget">
+
+        </activity>
+        <activity android:name=".add_item">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
