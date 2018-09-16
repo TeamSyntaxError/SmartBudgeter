@@ -69,13 +69,13 @@
                 android:padding="5dp"
                 android:layout_width="match_parent"
                 android:textAlignment="center"
-                android:layout_height="wrap_content" android:id="@+id/textView"/>
+                android:layout_height="wrap_content" android:id="@+id/availableCashTextView"/>
         <TextView
                 android:text="2000"
                 android:padding="5dp"
                 android:textSize="32dp"
                 android:layout_width="match_parent"
                 android:textAlignment="center"
-                android:layout_height="wrap_content" android:id="@+id/textView6"/>
+                android:layout_height="wrap_content" android:id="@+id/amountTextView"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

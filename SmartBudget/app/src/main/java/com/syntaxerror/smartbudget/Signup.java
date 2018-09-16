@@ -1,5 +1,8 @@
 package com.syntaxerror.smartbudget;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -34,19 +37,20 @@ public class Signup extends AppCompatActivity {
                     Toast.makeText(Signup.this,"Insert Failed",Toast.LENGTH_LONG).show();
                 }else
                     {
+                        SharedPreferences SPdata = getSharedPreferences("sharedData", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = SPdata.edit();
+                        editor.putBoolean("hasLoggedIn",true);
+                        editor.putString("userEmail",email.getText().toString());
+                        editor.putString("userName",name.getText().toString());
+                        editor.commit();
                         Toast.makeText(Signup.this,"Data Inserted",Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(Signup.this, MainActivity.class));
+                        finish();
                     }
 
             }
         });
     }
 
-    public void showMessage (String title , String message)
-    {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
-    }
+
 }

@@ -12,13 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.syntaxerror.smartbudget.tables.User;
 
 public class login extends AppCompatActivity {
 
-    private String UserEmail;
-    private String UserPassword;
+    private String UserEmail,UserPassword,UserName;
+    private int InitialAmount;
+    TextView signUp , forget;
     Button loginButton ;
     EditText email , password;
     DBManager myDB = new DBManager(this);
@@ -33,19 +35,22 @@ public class login extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.loginbutton);
         email = (EditText) findViewById(R.id.emailEditView);
         password = (EditText) findViewById(R.id.passwordEditView);
+        signUp  = (TextView) findViewById(R.id.signupTextView);
+        forget = (TextView) findViewById(R.id.forgetTextView);
 
         cursor = myDB.getUser();
         countUsers = cursor.getCount();
 
         if (countUsers==0)
         {
-            showMessage("NO USERS","No Users in the table!!");
+            myDB.showMessage(this,"NO USERS","No Users in the table!!");
 
         }
-        loginButtonClick();
+        loginButtonClick(this);
+        signupForgetClick();
     }
 
-    private void loginButtonClick()
+    private void loginButtonClick(final Context context)
     {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,7 +60,7 @@ public class login extends AppCompatActivity {
                     CheckAccountPassword();
                 }else
                     {
-                        showMessage("Not Registered","The email you entered not registered. Signup please");
+                        myDB.showMessage(context,"Not Registered","The email you entered not registered. Signup please");
                     }
             }
         });
@@ -73,6 +78,8 @@ public class login extends AppCompatActivity {
             if (email.getText().toString().equals(temp)) {
                 UserEmail = cursor.getString(cursor.getColumnIndex(User.USER_EMAIL));
                 UserPassword = cursor.getString(cursor.getColumnIndex(User.USER_PASSWORD));
+                UserName = cursor.getString(cursor.getColumnIndex(User.USER_NAME));
+                InitialAmount = cursor.getInt(cursor.getColumnIndex(User.INITIAL_AMOUNT));
                 isAccountRegistered = true;
                 break;
             }
@@ -90,6 +97,10 @@ public class login extends AppCompatActivity {
             SharedPreferences SPdata = getSharedPreferences("sharedData", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = SPdata.edit();
             editor.putBoolean("hasLoggedIn",true);
+            editor.putString("userEmail",UserEmail);
+            editor.putString("userName",UserName);
+            editor.putInt("initialAmount",InitialAmount);
+            editor.putInt("availableCash",InitialAmount);
             editor.commit();
             startActivity(new Intent(login.this, MainActivity.class));
             finish();
@@ -100,14 +111,25 @@ public class login extends AppCompatActivity {
             }
     }
 
-
-
-    public void showMessage (String title , String message)
+    private void signupForgetClick()
     {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
+        signUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(login.this, Signup.class));
+                finish();
+
+            }
+        });
+
+        forget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
+
+
+
 }

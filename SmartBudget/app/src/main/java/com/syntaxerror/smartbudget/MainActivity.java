@@ -15,7 +15,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button newBudget,viewBudget,myStatus;
-    TextView budgetName;
+    TextView budgetName,amount;
     ImageView logoutImage;
 
 
@@ -29,7 +29,13 @@ public class MainActivity extends AppCompatActivity {
         newBudget = (Button) findViewById(R.id.newbudgetbutton);
         viewBudget = (Button) findViewById(R.id.viewbudgetbutton);
         budgetName = (TextView) findViewById(R.id.nameOfBudgetText);
+        amount = (TextView) findViewById(R.id.amountTextView);
         logoutImage = (ImageView) findViewById(R.id.imageView3);
+
+        SharedPreferences SPdata = getSharedPreferences("sharedData", Context.MODE_PRIVATE);
+        String userName = SPdata.getString("userName","User");
+        budgetName.setText(userName);
+        amount.setText(""+SPdata.getInt("availableCash",00));
 
 
 
@@ -74,5 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
 
 }

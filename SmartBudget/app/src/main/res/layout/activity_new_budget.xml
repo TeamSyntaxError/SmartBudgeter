@@ -39,7 +39,7 @@
     <EditText
             android:layout_width="217dp"
             android:layout_height="50dp"
-            android:hint="2000 LKR"
+            android:hint="2000"
             android:inputType="number"
             android:ems="10"
             android:id="@+id/moneyEditText"
@@ -57,7 +57,7 @@
             android:layout_width="218dp"
             android:layout_height="51dp"
             android:inputType="date"
-            android:hint="End Date"
+            android:hint="DD/MM/YYYY"
             android:ems="10"
             android:id="@+id/enddateEditText"
             android:layout_marginTop="16dp"
@@ -73,9 +73,9 @@
             app:layout_constraintStart_toEndOf="@+id/enddateEditText"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
     <Button
-            android:text="Button"
+            android:text="Create"
             android:layout_width="138dp"
-            android:layout_height="56dp" android:id="@+id/button"
+            android:layout_height="56dp" android:id="@+id/createButton"
             app:layout_constraintEnd_toEndOf="@+id/spinner5"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="@+id/enddateEditText"
             android:layout_marginStart="8dp"
