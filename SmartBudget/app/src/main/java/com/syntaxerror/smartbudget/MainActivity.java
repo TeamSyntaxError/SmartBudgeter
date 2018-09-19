@@ -69,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 SharedPreferences SPdata = getSharedPreferences("sharedData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = SPdata.edit();
                 editor.putBoolean("hasLoggedIn",false);
+                editor.putString("currentBudgetName","N/A");
+                editor.putString("currentBudgetId","N/A");
+                editor.putString("userEmail","N/A");
+                editor.putString("userName","N/A");
                 editor.commit();
                 startActivity(new Intent(MainActivity.this,Home.class));
                 finish();

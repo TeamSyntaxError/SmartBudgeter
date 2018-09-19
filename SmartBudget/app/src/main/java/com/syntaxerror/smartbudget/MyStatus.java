@@ -1,12 +1,14 @@
 package com.syntaxerror.smartbudget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -40,6 +42,14 @@ public class MyStatus extends AppCompatActivity {
                 processList.setAdapter(budgetListAdapter);
             }
         }
+
+        processList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                startActivity(new Intent(MyStatus.this, EditBudget.class));
+
+            }
+        });
 
         backImageButton = (ImageView) findViewById(R.id.backImageView);
         BackClick();

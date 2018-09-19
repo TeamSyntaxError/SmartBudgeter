@@ -5,11 +5,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 import com.syntaxerror.smartbudget.tables.BudgetTable;
+
+import java.util.Calendar;
 
 
 public class NewBudget extends AppCompatActivity {
@@ -17,9 +22,10 @@ public class NewBudget extends AppCompatActivity {
     private ImageView backImageButton;
     private EditText budgetName ,amountOfBudget,endDate;
     private Button create;
-    private String phBudgetName,phEndDate,phAmount,phBudgetMainId,phEmail;
+    private String phBudgetName,phStartDate,phEndDate,phAmount,phBudgetMainId,phEmail;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +37,8 @@ public class NewBudget extends AppCompatActivity {
         amountOfBudget = (EditText) findViewById(R.id.moneyEditText);
         endDate = (EditText) findViewById(R.id.enddateEditText);
         create = (Button) findViewById(R.id.createButton);
+
+        phStartDate = MyDB.GetCurrentDate();
 
         SharedPreferences SPdata = getSharedPreferences("sharedData", Context.MODE_PRIVATE);
         phEmail = SPdata.getString("userEmail","N/A");
@@ -66,20 +74,20 @@ public class NewBudget extends AppCompatActivity {
             public void onClick(View view) {
                 Cursor cursor = MyDB.getBudget();
                 int noOfRows = cursor.getCount();
-                phBudgetMainId = BudgetMainIdCreate(noOfRows);
+                noOfRows+=1;
+                phBudgetMainId = MyDB.BudgetMainIdCreate(noOfRows);
                 phBudgetName = budgetName.getText().toString();
                 phAmount = amountOfBudget.getText().toString();
                 int findAmount = Integer.parseInt(phAmount);
                 phEndDate = endDate.getText().toString();
 
-                boolean rs = MyDB.InsertBudget(phBudgetMainId,phBudgetName,BudgetTable.OPTION_PROCESS,findAmount,phEndDate,phEmail);
+                boolean rs = MyDB.InsertBudget(phBudgetMainId,phBudgetName,BudgetTable.OPTION_PROCESS,findAmount,phStartDate,phEndDate,phEmail);
                 if (rs==false)
                 {
                     Toast.makeText(NewBudget.this,"Budget Creation Failed",Toast.LENGTH_LONG).show();
                 }else
                 {
                     Toast.makeText(NewBudget.this,"Budget Created Successfully!",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(NewBudget.this, MainActivity.class));
                     finish();
                 }
 
@@ -87,10 +95,5 @@ public class NewBudget extends AppCompatActivity {
         });
     }
 
-    public String BudgetMainIdCreate(int noOfRows)
-    {
-        String part1 = "SB";
-        String part2 = String.format("%04d",noOfRows);
-        return part1+part2;
-    }
+
 }

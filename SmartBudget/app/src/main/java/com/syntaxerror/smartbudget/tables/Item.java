@@ -11,5 +11,12 @@ public class Item {
     public static final String BUDGET_MAIN_ID = "budget_id";
     public static final String TABLE_NAME = "items";
 
+    public static final String TYPE_INCOME = "Income";
+    public static final String TYPE_Expenses = "Expenses";
+    public static final String TYPE_DEBT = "Debt";
+
+    public static final String TOTAL_AMOUNT = "total_amount";
+
+
 
 }
